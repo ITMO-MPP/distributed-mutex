@@ -9,7 +9,6 @@ project {
         name = "Build"
         vcs {
             root(DslContext.settingsRoot)
-            branchFilter = "+:<default>"
         }
     }
 }

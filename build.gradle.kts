@@ -3,7 +3,7 @@ group = "ru.ifmo.pds"
 version = "1.0-SNAPSHOT"
 
 plugins {
-    kotlin("jvm") version "1.3.61"
+    kotlin("jvm") version "1.4.30"
 }
 
 repositories {
@@ -16,14 +16,8 @@ dependencies {
     testImplementation(kotlin("test-junit"))
 }
 
-sourceSets {
-    main {
-        java.setSrcDirs(listOf("src"))
-    }
-    test {
-        java.setSrcDirs(listOf("test"))
-    }
-}
+sourceSets["main"].java.setSrcDirs(listOf("src"))
+sourceSets["test"].java.setSrcDirs(listOf("test"))
 
 val processId = project.properties["processId"] as? String ?: "1"
 val implName = project.properties["implName"] as? String ?: "ProcessImpl"

@@ -191,4 +191,4 @@ gradlew test -PimplName=ProcessRickartAgrawalaMutex -PskipCountCheck=true
 **Ваш код должен быть реализован в одном файле [`src/ProcessImpl.kt`](src/ProcessImpl.kt) или `src/ProcessImpl.java`**.
 
 Инструкции по сдаче заданий находятся в 
-[этом документе](https://docs.google.com/document/d/1GQ0OI_OBkj4kyOvhgRXfacbTI9huF4XJDMOct0Lh5og). 
+[этом документе](https://docs.google.com/document/d/1zrAY3nMBIuJidFzsiK9KU6u0KPZXjX-b5IsesZBTi_g). 

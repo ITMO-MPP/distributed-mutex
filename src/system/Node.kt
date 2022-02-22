@@ -1,11 +1,10 @@
 package mutex.system
 
-import org.slf4j.*
 import mutex.*
+import org.slf4j.*
 import java.io.*
 import java.net.*
 import java.util.concurrent.*
-import kotlin.collections.LinkedHashSet
 
 const val DEFAULT_IMPL_NAME = "ProcessImpl"
 
@@ -64,7 +63,7 @@ fun createProcess(env: Environment, implName: String): Process =
         .getConstructor(Environment::class.java)
         .newInstance(env) as Process
 
-val ACTION_TAG = "@"
+const val ACTION_TAG = "@"
 
 private class EnvironmentImpl(
     override val processId: Int,
@@ -133,7 +132,7 @@ private class NodeConsole(private val env: EnvironmentImpl) : Thread("Console") 
     override fun run() {
         loop@ while (true) {
             val line = readLine() ?: break
-            when (line.trim().toLowerCase()) {
+            when (line.trim().lowercase()) {
                 "" -> {} // do nothing
                 "exit" -> break@loop
                 "lock" -> env.incoming.put(LockReq)

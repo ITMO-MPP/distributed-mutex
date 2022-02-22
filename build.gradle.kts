@@ -3,16 +3,16 @@ group = "ru.ifmo.pds"
 version = "1.0-SNAPSHOT"
 
 plugins {
-    kotlin("jvm") version "1.4.30"
+    kotlin("jvm") version "1.6.10"
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
-    implementation("ch.qos.logback:logback-classic:1.2.3")
+    implementation("ch.qos.logback:logback-classic:1.2.10")
     testImplementation(kotlin("test-junit"))
 }
 
@@ -21,6 +21,12 @@ sourceSets["test"].java.setSrcDirs(listOf("test"))
 
 val processId = project.properties["processId"] as? String ?: "1"
 val implName = project.properties["implName"] as? String ?: "ProcessImpl"
+
+kotlin {
+    jvmToolchain {
+        (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
 
 tasks {
     test {
@@ -31,14 +37,14 @@ tasks {
 
     register<JavaExec>("node") {
         classpath = sourceSets["main"].runtimeClasspath
-        main = "mutex.system.NodeKt"
+        mainClass.set("mutex.system.NodeKt")
         args = listOf(processId, implName)
         standardInput = System.`in`
     }
 
     register<JavaExec>("system") {
         classpath = sourceSets["main"].runtimeClasspath
-        main = "mutex.system.SystemKt"
+        mainClass.set("mutex.system.SystemKt")
         args = listOf(implName)
         standardInput = System.`in`
     }

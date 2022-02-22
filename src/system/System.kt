@@ -34,7 +34,7 @@ val javaHome = System.getProperty("java.home")!!
 val classPath = System.getProperty("java.class.path")!!
 
 open class DistributedSystem(args: Array<out String>) {
-    protected val log = LoggerFactory.getLogger("System")
+    protected val log: Logger = LoggerFactory.getLogger("System")
     private val procs: List<NodeProcess>
 
     init {
@@ -133,7 +133,7 @@ class SystemConsole(private val sys: DistributedSystem) : Thread("Console") {
     override fun run() {
         loop@ while (true) {
             val line = readLine()?.trim() ?: continue
-            when (line.toLowerCase()) {
+            when (line.lowercase()) {
                 "exit" -> break@loop
                 "ping" -> sys.reqAll("ping")
                 "lock" -> sys.reqAll("lock")

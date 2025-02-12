@@ -1,30 +1,34 @@
+plugins {
+    kotlin("jvm") version "2.1.10"
+    java
+}
 
 group = "ru.ifmo.pds"
 version = "1.0-SNAPSHOT"
-
-plugins {
-    kotlin("jvm") version "1.6.10"
-}
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
     implementation("ch.qos.logback:logback-classic:1.2.10")
     testImplementation(kotlin("test-junit"))
 }
 
-sourceSets["main"].java.setSrcDirs(listOf("src"))
-sourceSets["test"].java.setSrcDirs(listOf("test"))
+sourceSets.main {
+    java.srcDir("src")
+}
+
+sourceSets.test {
+    java.srcDir("test")
+}
 
 val processId = project.properties["processId"] as? String ?: "1"
 val implName = project.properties["implName"] as? String ?: "ProcessImpl"
 
-kotlin {
-    jvmToolchain {
-        (this as JavaToolchainSpec).languageVersion.set(JavaLanguageVersion.of(11))
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(21))
     }
 }
 
